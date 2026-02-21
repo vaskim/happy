@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>От Бори 💌</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ff2d55;
+            --pink-soft: #ff6b8a;
+            --pink-pastel: #ffc2d4;
+            --card-border: rgba(255,255,255,0.08);
+            --emoji-dim: 0.5;
+        }
+
+        *, *::before, *::after {
+            margin: 0; padding: 0; box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        .e {
+            opacity: var(--emoji-dim);
+            filter: brightness(0.75);
+            display: inline-block;
+        }
+
+        /* Background */
+        .bg-layer {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 500px 500px at 15% 15%, rgba(255,45,85,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 400px 400px at 80% 80%, rgba(255,100,130,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse 300px 300px at 50% 50%, rgba(192,192,192,0.04) 0%, transparent 60%);
+        }
+
+        /* Reveal */
+        .sr {
+            opacity: 0;
+            transform: translate3d(0, 24px, 0);
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
+        }
+        .sr-s {
+            opacity: 0;
+            transform: scale3d(0.95, 0.95, 1);
+            transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .sr.v, .sr-s.v { opacity: 1; transform: translate3d(0,0,0) scale3d(1,1,1); }
+        .d1 { transition-delay: 0.1s; }
+        .d2 { transition-delay: 0.2s; }
+        .d3 { transition-delay: 0.3s; }
+        .d4 { transition-delay: 0.4s; }
+        .d5 { transition-delay: 0.5s; }
+
+        /* Layout */
+        .page {
+            position: relative;
+            z-index: 2;
+            max-width: 428px;
+            margin: 0 auto;
+            padding: 0 24px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+            padding-top: 60px;
+        }
+
+        .header-icon {
+            font-size: 36px;
+            opacity: var(--emoji-dim);
+            filter: brightness(0.75);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .header-label {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--pink);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .header-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        /* Letter card */
+        .letter-card {
+            background: transparent;
+            border-radius: 13px;
+            border: 1px solid var(--card-border);
+            padding: 32px 24px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .letter-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 0.5px;
+            background: linear-gradient(90deg, transparent, rgba(255,45,85,0.12), transparent);
+        }
+
+        .letter-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 17px;
+            font-style: italic;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.7);
+            text-align: left;
+        }
+
+        .letter-text p {
+            margin-bottom: 16px;
+        }
+
+        .letter-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .letter-highlight {
+            color: rgba(255,255,255,0.9);
+            font-weight: 500;
+        }
+
+        .letter-sig {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            text-align: right;
+        }
+
+        .letter-sig-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--pink-soft);
+            font-style: italic;
+        }
+
+        .letter-sig-sub {
+            font-size: 11px;
+            color: rgba(255,255,255,0.25);
+            margin-top: 2px;
+        }
+
+        /* Bouquet section */
+        .bouquet-section {
+            text-align: center;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+
+        .bouquet-card {
+            background: transparent;
+            border-radius: 13px;
+            border: 1px solid rgba(255,45,85,0.1);
+            padding: 28px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bouquet-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 0.5px;
+            background: linear-gradient(90deg, transparent, rgba(255,45,85,0.15), transparent);
+        }
+
+        .bouquet-label {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--pink);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .bouquet-roses {
+            font-size: 64px;
+            line-height: 1;
+            margin-bottom: 16px;
+            opacity: var(--emoji-dim);
+            filter: brightness(0.75);
+        }
+
+        .bouquet-note {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            font-style: italic;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.55);
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        /* Back button */
+        .back-wrap {
+            text-align: center;
+            padding-bottom: 80px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 13px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.4);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .back-btn:active {
+            transform: scale(0.95);
+            background: rgba(255,255,255,0.03);
+        }
+
+        /* Confetti */
+        .conf {
+            position: fixed;
+            top: -20px;
+            z-index: 10000;
+            pointer-events: none;
+            animation: confFall linear forwards;
+        }
+        @keyframes confFall {
+            0% { opacity: 0.6; transform: translateY(0) rotate(0deg); }
+            100% { opacity: 0; transform: translateY(100vh) rotate(500deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-layer"></div>
+
+    <div class="page">
+
+        <!-- Header -->
+        <div class="header sr">
+            <span class="header-icon">💌</span>
+            <div class="header-label sr d1">Лично</div>
+            <h1 class="header-title sr d2">От Бори</h1>
+        </div>
+
+        <!-- Letter -->
+        <div class="letter-card sr-s d3">
+            <div class="letter-text">
+                <p>
+                    Дорогая тётя Люба,
+                </p>
+                <p>
+                    Спасибо вам за то, что кормите меня, терпите в&nbsp;каких-то моментах — я&nbsp;ведь вижу, когда вам что-то не&nbsp;нравится, даже если вы&nbsp;молчите. <span class="letter-highlight">Я&nbsp;это ценю больше, чем могу выразить словами.</span>
+                </p>
+                <p>
+                    Знайте и&nbsp;верьте — <span class="letter-highlight">у&nbsp;вас всё получится.</span> Всё, о&nbsp;чём мечтаете, — сбудется. Потому что вы&nbsp;сами строите свою жизнь, и&nbsp;ваша жизнь — в&nbsp;ваших руках.
+                </p>
+                <p>
+                    Это не&nbsp;значит, что не&nbsp;на&nbsp;кого положиться. Это значит, что <span class="letter-highlight">вы&nbsp;и&nbsp;есть бог своей жизни.</span> Вы&nbsp;решаете, каким будет каждый новый день.
+                </p>
+                <p>
+                    Всегда улыбайтесь. И&nbsp;всегда помните, как я&nbsp;говорил и&nbsp;Васе, и&nbsp;вам — <span class="letter-highlight">вы&nbsp;можете легко попросить меня о&nbsp;чём угодно.</span> Мне не&nbsp;сложно. А&nbsp;даже если было&nbsp;бы сложно — я&nbsp;бы всё равно сделал.
+                </p>
+                <p>
+                    С днём рождения! <span class="e">🤍</span>
+                </p>
+            </div>
+            <div class="letter-sig">
+                <div class="letter-sig-name">Ваш Боря</div>
+                <div class="letter-sig-sub">зять, который старается</div>
+            </div>
+        </div>
+
+        <!-- Bouquet -->
+        <div class="bouquet-section sr d4">
+            <div class="bouquet-card">
+                <div class="bouquet-label"><span class="e">💐</span> Букет для вас</div>
+                <div class="bouquet-roses">
+                    💐
+                </div>
+                <p class="bouquet-note">
+                    <em>P.S. Снег почищу, пачку верну... может быть</em> <span class="e">😏</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Back -->
+        <div class="back-wrap sr d5">
+            <a href="index.html" class="back-btn"><span class="e">←</span> Назад к поздравлению</a>
+        </div>
+
+    </div>
+
+
+    <script>
+        /* Scroll reveal */
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('v');
+            });
+        }, { threshold: 0.08 });
+
+        document.querySelectorAll('.sr, .sr-s').forEach(el => io.observe(el));
+
+        /* Confetti on load */
+        function confetti(n) {
+            const em = ['🌹','💕','✨','🩷','🌸'];
+            for (let i = 0; i < n; i++) {
+                setTimeout(() => {
+                    const c = document.createElement('div');
+                    c.className = 'conf';
+                    c.textContent = em[Math.floor(Math.random() * em.length)];
+                    c.style.left = Math.random() * 100 + 'vw';
+                    c.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                    c.style.animationDuration = (Math.random() * 2 + 2.5) + 's';
+                    document.body.appendChild(c);
+                    setTimeout(() => c.remove(), 5000);
+                }, i * 60);
+            }
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => confetti(12), 400);
+        });
+
+        /* Prevent zoom */
+        document.addEventListener('gesturestart', e => e.preventDefault());
+        let lt = 0;
+        document.addEventListener('touchend', e => {
+            const n = Date.now();
+            if (n - lt <= 300) e.preventDefault();
+            lt = n;
+        }, false);
+    </script>
+</body>
+</html>
